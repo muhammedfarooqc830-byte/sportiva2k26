@@ -65,7 +65,7 @@ const Celebration: React.FC<{ onClose: () => void }> = ({ onClose }) => {
   return (
     <div className="fixed inset-0 z-50 pointer-events-none flex items-center justify-center overflow-hidden">
       {/* Dimmed Background */}
-      <div className="absolute inset-0 bg-black/20 animate-fade-in" />
+      <div className="absolute inset-0 bg-black/60 animate-fade-in" />
 
       {/* Celebration Text Overlay */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-50 animate-bounce-in">

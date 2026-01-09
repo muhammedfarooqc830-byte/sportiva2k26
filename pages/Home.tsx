@@ -33,10 +33,10 @@ const Home: React.FC<HomeProps> = ({ results }) => {
   return (
     <div className="animate-fade-in">
       <div className="text-center mb-10">
-        <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+        <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
           Overall Standing
         </h2>
-        <p className="mt-2 text-lg text-gray-600">
+        <p className="mt-2 text-lg text-gray-600 dark:text-gray-300">
           Live updates from the field
         </p>
       </div>
@@ -44,7 +44,7 @@ const Home: React.FC<HomeProps> = ({ results }) => {
       <Leaderboard data={leaderboardData} />
       
       <div className="mt-12">
-        <h3 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
           <span className="bg-indigo-600 w-1 h-6 rounded-full"></span>
           Detailed Results
         </h3>

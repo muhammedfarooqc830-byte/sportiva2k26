@@ -45,30 +45,30 @@ const ResultsList: React.FC<ResultsListProps> = ({ results, onDelete, isAdmin = 
   }, [filteredRaw]);
 
   const getBadgeColor = (pos: number) => {
-    if (pos === 1) return 'bg-yellow-100 text-yellow-800 border-yellow-200 ring-2 ring-yellow-50';
-    if (pos === 2) return 'bg-gray-100 text-gray-800 border-gray-200 ring-2 ring-gray-50';
-    if (pos === 3) return 'bg-orange-100 text-orange-800 border-orange-200 ring-2 ring-orange-50';
+    if (pos === 1) return 'bg-yellow-100 dark:bg-yellow-900/40 text-yellow-800 dark:text-yellow-300 border-yellow-200 dark:border-yellow-700 ring-2 ring-yellow-50 dark:ring-transparent';
+    if (pos === 2) return 'bg-gray-100 dark:bg-gray-700/50 text-gray-800 dark:text-gray-300 border-gray-200 dark:border-gray-600 ring-2 ring-gray-50 dark:ring-transparent';
+    if (pos === 3) return 'bg-orange-100 dark:bg-orange-900/40 text-orange-800 dark:text-orange-300 border-orange-200 dark:border-orange-700 ring-2 ring-orange-50 dark:ring-transparent';
     return 'bg-gray-50 text-gray-600';
   };
 
   const getGroupColor = (group: string) => {
      switch(group) {
-        case 'Green': return 'text-green-700 bg-green-50 border-green-200';
-        case 'Red': return 'text-red-700 bg-red-50 border-red-200';
-        case 'Blue': return 'text-blue-700 bg-blue-50 border-blue-200';
-        default: return 'text-gray-600';
+        case 'Green': return 'text-green-700 dark:text-green-400 bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800';
+        case 'Red': return 'text-red-700 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800';
+        case 'Blue': return 'text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-800';
+        default: return 'text-gray-600 dark:text-gray-400';
      }
   }
 
   return (
     <div className="space-y-6">
       {/* Filters */}
-      <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 flex flex-col md:flex-row gap-4 justify-between items-center">
+      <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row gap-4 justify-between items-center transition-colors">
         <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
           <select 
             value={filterGroup} 
             onChange={(e) => setFilterGroup(e.target.value as any)}
-            className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium text-gray-700"
+            className="px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium text-gray-700 dark:text-gray-200"
           >
             <option value="All">All Groups</option>
             {GROUPS.map(g => <option key={g} value={g}>{g}</option>)}
@@ -76,7 +76,7 @@ const ResultsList: React.FC<ResultsListProps> = ({ results, onDelete, isAdmin = 
           <select 
             value={filterType} 
             onChange={(e) => setFilterType(e.target.value as any)}
-            className="px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium text-gray-700"
+            className="px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 font-medium text-gray-700 dark:text-gray-200"
           >
             <option value="All">All Events</option>
             {EVENT_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
@@ -88,7 +88,7 @@ const ResultsList: React.FC<ResultsListProps> = ({ results, onDelete, isAdmin = 
             placeholder="Search student or event..." 
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
           />
         </div>
       </div>
@@ -98,19 +98,19 @@ const ResultsList: React.FC<ResultsListProps> = ({ results, onDelete, isAdmin = 
         {groupedResults.length > 0 ? groupedResults.map((groupResults, index) => {
           const eventInfo = groupResults[0];
           return (
-            <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+            <div key={index} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-md transition-shadow">
               {/* Event Header */}
-              <div className="bg-gray-50 px-6 py-3 border-b border-gray-100 flex justify-between items-center">
+              <div className="bg-gray-50 dark:bg-gray-700/50 px-6 py-3 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
                 <div>
-                    <h3 className="font-bold text-gray-800 text-lg">{eventInfo.eventName}</h3>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-indigo-500 bg-indigo-50 px-2 py-0.5 rounded-full">
+                    <h3 className="font-bold text-gray-800 dark:text-gray-100 text-lg">{eventInfo.eventName}</h3>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-indigo-500 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-0.5 rounded-full">
                         {eventInfo.eventType}
                     </span>
                 </div>
                 {isAdmin && onDelete && (
                     <button 
                         onClick={() => onDelete(groupResults.map(r => r.id))}
-                        className="text-red-500 hover:text-red-700 text-xs font-bold border border-red-200 hover:bg-red-50 px-3 py-1.5 rounded transition-colors"
+                        className="text-red-500 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 text-xs font-bold border border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/30 px-3 py-1.5 rounded transition-colors"
                     >
                         Delete Event
                     </button>
@@ -118,22 +118,22 @@ const ResultsList: React.FC<ResultsListProps> = ({ results, onDelete, isAdmin = 
               </div>
               
               {/* Winners Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100">
+              <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100 dark:divide-gray-700">
                 {groupResults.map((result) => (
                   <div key={result.id} className="p-4 flex items-center gap-4">
                     <div className={`flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full font-bold text-sm shadow-sm ${getBadgeColor(result.position)}`}>
                         {result.position === 1 ? '1st' : result.position === 2 ? '2nd' : '3rd'}
                     </div>
                     <div className="flex-grow min-w-0">
-                        <p className="text-sm font-bold text-gray-900 truncate">{result.studentName}</p>
-                        <p className="text-xs text-gray-500 mb-1">{result.registerNumber}</p>
+                        <p className="text-sm font-bold text-gray-900 dark:text-white truncate">{result.studentName}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">{result.registerNumber}</p>
                         <span className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wide border ${getGroupColor(result.group)}`}>
                             {result.group}
                         </span>
                     </div>
                     <div className="text-right">
-                        <span className="block font-bold text-gray-900 text-lg">{result.points}</span>
-                        <span className="text-[10px] text-gray-400 uppercase">Pts</span>
+                        <span className="block font-bold text-gray-900 dark:text-white text-lg">{result.points}</span>
+                        <span className="text-[10px] text-gray-400 dark:text-gray-500 uppercase">Pts</span>
                     </div>
                   </div>
                 ))}
@@ -141,8 +141,8 @@ const ResultsList: React.FC<ResultsListProps> = ({ results, onDelete, isAdmin = 
             </div>
           );
         }) : (
-          <div className="text-center py-12 bg-white rounded-xl border border-dashed border-gray-300">
-            <p className="text-gray-400 italic">No results found matching your criteria.</p>
+          <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-xl border border-dashed border-gray-300 dark:border-gray-600 transition-colors">
+            <p className="text-gray-400 dark:text-gray-500 italic">No results found matching your criteria.</p>
           </div>
         )}
       </div>

@@ -26,7 +26,7 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
 
   return (
     <div 
-      className={`fixed inset-0 z-[100] bg-white flex flex-col items-center justify-center transition-all duration-1000 ease-in-out ${
+      className={`fixed inset-0 z-[100] bg-white dark:bg-gray-900 flex flex-col items-center justify-center transition-all duration-1000 ease-in-out ${
         isExiting ? 'opacity-0 pointer-events-none scale-105' : 'opacity-100 scale-100'
       }`}
     >
@@ -35,17 +35,17 @@ const IntroScreen: React.FC<IntroScreenProps> = ({ onComplete }) => {
         <div className="w-16 h-1 bg-indigo-600 mx-auto mb-8 rounded-full opacity-80"></div>
 
         {/* Institution Name */}
-        <p className="text-gray-500 font-bold tracking-[0.25em] uppercase text-xs sm:text-sm mb-6">
+        <p className="text-gray-500 dark:text-gray-400 font-bold tracking-[0.25em] uppercase text-xs sm:text-sm mb-6">
           Jamia Islamiya Arts and Science College
         </p>
 
         {/* Event Name (Ceremonial Title) */}
-        <h1 className="text-5xl sm:text-7xl md:text-8xl font-black text-gray-900 tracking-tighter mb-4 leading-none">
-          SPORTIVA <span className="text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-blue-500">2K26</span>
+        <h1 className="text-5xl sm:text-7xl md:text-8xl font-black text-gray-900 dark:text-white tracking-tighter mb-4 leading-none">
+          SPORTIVA <span className="text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-blue-500 dark:from-indigo-400 dark:to-blue-400">2K26</span>
         </h1>
 
         {/* Subtitle */}
-        <p className="text-xl sm:text-2xl text-gray-400 font-light tracking-[0.2em] uppercase mt-4">
+        <p className="text-xl sm:text-2xl text-gray-400 dark:text-gray-500 font-light tracking-[0.2em] uppercase mt-4">
           Annual Sports Meet
         </p>
       </div>

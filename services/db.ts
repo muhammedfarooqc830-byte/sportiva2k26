@@ -20,26 +20,20 @@ import {
 import { Result, SportsEvent } from '../types';
 
 // --- CONFIGURATION ---
-// Safely access environment variables using optional chaining
-// This prevents crashes if import.meta.env is undefined in certain environments
-const getEnv = (key: string) => {
-  try {
-    return (import.meta as any).env?.[key];
-  } catch (e) {
-    return undefined;
-  }
-};
-
+// In Netlify, set these variables in Site Settings > Environment Variables.
+// They must start with VITE_
 const firebaseConfig = {
-  apiKey: getEnv("VITE_FIREBASE_API_KEY") || "demo-key",
-  authDomain: getEnv("VITE_FIREBASE_AUTH_DOMAIN") || "demo.firebaseapp.com",
-  projectId: getEnv("VITE_FIREBASE_PROJECT_ID") || "demo-project",
-  storageBucket: getEnv("VITE_FIREBASE_STORAGE_BUCKET") || "demo.appspot.com",
-  messagingSenderId: getEnv("VITE_FIREBASE_MESSAGING_SENDER_ID") || "12345",
-  appId: getEnv("VITE_FIREBASE_APP_ID") || "1:12345:web:12345"
+  // Use optional chaining (?.) to avoid "Cannot read properties of undefined" if env is missing
+  apiKey: (import.meta as any).env?.VITE_FIREBASE_API_KEY,
+  authDomain: (import.meta as any).env?.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: (import.meta as any).env?.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: (import.meta as any).env?.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: (import.meta as any).env?.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: (import.meta as any).env?.VITE_FIREBASE_APP_ID
 };
 
-const isDemoMode = firebaseConfig.apiKey === "demo-key";
+// Check if we are in demo mode (missing API key)
+const isDemoMode = !firebaseConfig.apiKey || firebaseConfig.apiKey === "demo-key";
 
 // --- FIREBASE INIT ---
 let auth: any;
@@ -112,7 +106,7 @@ export const loginAdmin = async (email: string, pass: string) => {
       window.dispatchEvent(new Event(AUTH_EVENT));
       return mockUser;
     }
-    throw new Error('Invalid demo credentials. Use admin@college.edu / admin123');
+    throw new Error('Invalid demo credentials.');
   }
   return signInWithEmailAndPassword(auth, email, pass);
 };

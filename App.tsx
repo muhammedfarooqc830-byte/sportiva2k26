@@ -18,6 +18,26 @@ const App: React.FC = () => {
   const [showCelebration, setShowCelebration] = useState(false);
   const [showIntro, setShowIntro] = useState(true);
 
+  // Theme State
+  const [darkMode, setDarkMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem('sportiva_theme');
+    if (saved) return saved === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  // Apply Theme
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('sportiva_theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('sportiva_theme', 'light');
+    }
+  }, [darkMode]);
+
+  const toggleTheme = () => setDarkMode(!darkMode);
+
   // Initial load
   useEffect(() => {
     // 1. Auth Listener
@@ -59,11 +79,17 @@ const App: React.FC = () => {
       
       {/* Main Content - Rendered behind the Intro to allow for a smooth fade-reveal */}
       {loading ? (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
         </div>
       ) : (
-        <Layout user={user} onNavigate={navigate} currentPage={page}>
+        <Layout 
+          user={user} 
+          onNavigate={navigate} 
+          currentPage={page}
+          darkMode={darkMode}
+          toggleTheme={toggleTheme}
+        >
           {page === 'home' && <Home results={results} />}
           {page === 'admin' && (
             user ? 
